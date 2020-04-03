@@ -11,7 +11,7 @@ class Anagram
       arr_split = array.map {|word| word.split("")}
       word_split = @word.split("")
       words = arr_split.collect do |word| 
-        (word & word_split).flat_map {|n|[n]*[word.count(n), split_word.count(n)].min}.join('') 
+        (word & word_split).flat_map {|n|[n]*[word.count(n), word_split.count(n)].min}.join('') 
       end
 
       word_split_size = word_split.join("").size
