@@ -7,19 +7,24 @@ class Anagram
     end
     
     def match(array)
-      new_arr = []
       arr_split = array.map {|word| word.split("")}
       word_split = @word.split("")
+      new_arr = []
       words = arr_split.collect do |word| 
-        (word & word_split).flat_map {|n|[n]*[word.count(n), word_split.count(n)].min}.join('') 
+        if word.size == word_split.size
+          new_arr << word 
+        end  
       end
-
+      result = new_arr.collect do |word|
+        (word & word_split).flat_map {|n|[n]*[word.count(n), word_split.count(n)].min}.join('')
+      end
+      results = []
       word_split_size = word_split.join("").size
-      words.map do |each|
-        if each.size == word_split_size
-          new_arr << each
+      result.map do |each| 
+        if each.size == word_split_size 
+          results << each
         end
       end
-      new_arr
+      results
     end
 end
